@@ -1,0 +1,16 @@
+{
+  "name": "cell-growth-assessment",
+  "version": "1.0.0",
+  "description": "Cell Growth Simulation - DSA Assessment",
+  "main": "solution.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "dsa",
+    "grid",
+    "simulation"
+  ],
+  "author": "",
+  "license": "ISC"
+}
