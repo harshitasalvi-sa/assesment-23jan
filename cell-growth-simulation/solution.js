@@ -30,6 +30,39 @@
 
 function simulateCellGrowth(grid, k) {
   // Your implementation here
+  let row = grid.length;
+  let col = grid[0].length;
+
+  //const result = grid.map((row) => [...row]);
+
+    let dx = [1, 0, -1, 0];
+    let dy = [0, 1, 0, -1]; 
+    
+
+  function updateGrid(grid){
+    let copy = grid.map(row => [...row]);
+    
+    for(let i = 0; i<grid.length; i++){
+      for(let j = 0; j<grid[0].length; j++){
+        if(grid[i][j] >= 2){
+          for(let k = 0; k<4; k++){
+            if((i+dx[k] >= 0 && i+dx[k] < row) && (j+dy[k] >= 0 && j+dy[k] < col)){
+              // grid[i+dx[k]][j+dy[k]] =  grid[i+dx[k]][j+dy[k]]+1;
+              //console.log("Old value = "+grid[i+dx[k]][j+dy[k]]);
+              copy[i+dx[k]][j+dy[k]]++;
+              //console.log(`At ${i+dx[k]}, ${j+dy[k]}  = `+grid[i+dx[k]][j+dy[k]]);
+            }
+          }
+        }
+      }
+    }
+    return copy;
+  }
+  
+  for(let i = 0; i<k; i++){
+    grid = updateGrid(grid);
+  }
+  return grid;
 }
 
 module.exports = simulateCellGrowth;

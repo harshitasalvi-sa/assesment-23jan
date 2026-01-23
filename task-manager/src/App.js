@@ -1,12 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {createContext, useState, useEffect} from "react"
 import "./App.css";
+import Home from "./components/Home";
+import AddTask from "./components/AddTask";
+import TaskDetail from "./components/TaskDetail"
+import NotFound from "./components/NotFound"
+import About from "./components/About"
 
 // TODO: Import your context providers
 // import { TaskProvider } from './context/TaskContext';
 // import { ThemeProvider } from './context/ThemeContext';
 
 // TODO: Import your components
-// import Navbar from './components/Navbar';
+import Navbar from './components/Navbar';
 
 // TODO: Import your pages
 // import Home from './pages/Home';
@@ -15,33 +21,46 @@ import "./App.css";
 // import About from './pages/About';
 // import NotFound from './pages/NotFound';
 
+const ThemeContext = createContext();
+const TaskContext = createContext();
+
 function App() {
+  const [theme, setTheme] = useState("light");
+  const [taskList, setTaskList] = useState([]);
+
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+  },[taskList])
+
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
+      
       {/* TODO: Wrap with your context providers */}
-      {/* <ThemeProvider> */}
-      {/*   <TaskProvider> */}
+      <ThemeContext.Provider value={{theme, setTheme}}>
+        <TaskContext.Provider value={{taskList, setTaskList}}>
 
       <Router>
-        {/* TODO: Add Navbar */}
-        {/* <Navbar /> */}
+         
+        <Navbar/>
 
         <Routes>
-          {/* TODO: Add your routes */}
-          {/* <Route path="/" element={<Home />} /> */}
-          {/* <Route path="/add" element={<AddTask />} /> */}
-          {/* <Route path="/tasks/:id" element={<TaskDetail />} /> */}
-          {/* <Route path="/about" element={<About />} /> */}
-          {/* <Route path="*" element={<NotFound />} /> */}
+         
+          <Route path="/" element={<Home />} />
+          <Route path="/add" element={<AddTask/>} />
+          <Route path="/tasks/:id" element={<TaskDetail />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
 
           <Route path="*" element={<div>Start building your app!</div>} />
         </Routes>
       </Router>
 
-      {/*   </TaskProvider> */}
-      {/* </ThemeProvider> */}
+        </TaskContext.Provider>
+      </ThemeContext.Provider> 
     </div>
   );
 }
 
 export default App;
+export {ThemeContext};
+export {TaskContext};
