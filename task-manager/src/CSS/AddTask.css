@@ -1,3 +1,6 @@
-.title, .desc{
+#title, #desc{
     padding: 10px;
+}
+.task-form{
+    margin: auto;
 }

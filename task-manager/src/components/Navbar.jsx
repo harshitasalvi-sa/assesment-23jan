@@ -17,7 +17,7 @@ const Navbar = React.memo(() => {
   return (
     <div>
         <nav className='navbar'>
-            <h1>Movie List App</h1>
+            <h1>To Do App</h1>
             
              <button className='theme-btn' onClick={toggleTheme}> 
                 {theme==="light" ? "Dark Mode" : "Light Mode"}

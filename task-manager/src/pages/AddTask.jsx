@@ -20,10 +20,7 @@ const AddTask = () => {
             status : "todo"
         }
             console.log('AddTask - before add', taskList, obj)
-            setTaskList(prev => {
-                console.log('AddTask updater prev', prev)
-                return [...prev, obj]
-            })
+            setTaskList(prev => [...prev, obj])
             console.log('AddTask - after setTaskList called')
             // navigate('/') // temporarily disabled to observe state updates
         setDesc("");
@@ -31,7 +28,7 @@ const AddTask = () => {
     }
 
   return (
-    <div>
+    <div className='task-form'>
         <form onSubmit={submitHandler}>
             <input id="title" type="text" value={title} placeholder='Title' onChange={(e)=>setTitle(e.target.value)}/>
             <input id='desc' type="text" value={desc} placeholder='Description' onChange={(e)=>setDesc(e.target.value)}/>

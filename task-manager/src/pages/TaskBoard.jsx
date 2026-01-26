@@ -1,7 +1,8 @@
 import React from 'react'
 import { TaskContext } from '../App'
 import TaskDetail from './TaskDetail';
-import {useContext} from "react"
+import {useContext} from "react";
+import "../CSS/TaskBoard.css"
 
 const TaskBoard = ({type}) => {
     const {taskList, setTaskList} = useContext(TaskContext)
@@ -9,13 +10,16 @@ const TaskBoard = ({type}) => {
     const filteredData = Array.isArray(taskList) ? taskList.filter(x => x.status === type) : [];
     console.log('TaskBoard - filteredData', filteredData);
   return (
-    <div>
+    <div className='taskBoard'>
+        <h1 className={type}
+        >{type}</h1>
         {filteredData.length > 0 ?
-            filteredData.map(x =>(
-                    <TaskDetail key={x.id} title ={x.title} desc = {x.desc}/>
+            filteredData.map(x =>
+                (
+                    <TaskDetail key={x.id} id={x.id} title ={x.title} desc = {x.desc} status ={type}/>
                 )
             )
-        : <p>No dat found</p>
+        : <p>No data found</p>
         }
     </div>
   )

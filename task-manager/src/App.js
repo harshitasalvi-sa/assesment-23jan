@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {createContext, useState, useEffect} from "react"
 import "./App.css";
-import Home from "./components/Home";
-import AddTask from "./components/AddTask";
-import TaskDetail from "./components/TaskDetail"
-import NotFound from "./components/NotFound"
-import About from "./components/About"
+import Home from "./pages/Home";
+import AddTask from "./pages/AddTask";
+import TaskDetail from "./pages/TaskDetail"
+import NotFound from "./pages/NotFound"
+import About from "./pages/About"
 
 // TODO: Import your context providers
 // import { TaskProvider } from './context/TaskContext';
@@ -26,7 +26,11 @@ const TaskContext = createContext();
 
 function App() {
   const [theme, setTheme] = useState("light");
-  const [taskList, setTaskList] = useState([]);
+  // const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(() => {
+    const stored = localStorage.getItem("tasks");
+    return stored ? JSON.parse(stored) : [];
+  });
 
   useEffect(()=>{
     localStorage.setItem("tasks", JSON.stringify(taskList));

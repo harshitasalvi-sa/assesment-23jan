@@ -21,8 +21,16 @@
   --danger: #dc3545;
 }
 
-[data-theme="dark"] {
-  /* Dark theme */
+/* [data-theme="dark"] {
+  /* Dark theme 
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --border-color: #444444;
+  --shadow: rgba(0, 0, 0, 0.5);
+} */
+.App.dark{
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;
   --text-primary: #ffffff;
