@@ -1,62 +1,56 @@
-import React, {useContext} from 'react'
-import { TaskContext } from '../App';
+import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { TaskContext } from "../context/TaskContext";
 
+function TaskDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(TaskContext);
 
-const TaskDetail = ({id, title, desc, status}) => {
-    
-  const { taskList, setTaskList } = useContext(TaskContext);
-  console.log("Task Detail", { title, desc });
+  const task = state.tasks.find((t) => t.id === Number(id));
 
-   const changeStatus = (newStatus) => {
-    const updatedTasks = taskList.map(task =>
-      task.id === id ? { ...task, status: newStatus } : task
-    );
-    setTaskList(updatedTasks);
-  };
+  const [title, setTitle] = useState(task?.title || "");
+  const [description, setDescription] = useState(task?.description || "");
 
-  const deleteTask = () => {
-    const confirmed = window.confirm("Are you sure you want to delete?");
-    if (!confirmed) return;
+  if (!task) {
+    return <p>Task not found</p>;
+  }
 
-    const updatedTasks = taskList.filter(task => task.id !== id);
-    setTaskList(updatedTasks);
+  const saveHandler = () => {
+    dispatch({
+      type: "UPDATE_TASK",
+      payload: {
+        ...task,
+        title,
+        description,
+      },
+    });
+    navigate("/");
   };
 
   return (
-    <div className='taskDetail' style={{ border: '1px solid black' }}>
-        <h2>{title}</h2>
-        <p>{desc}</p>
+    <div style={{ padding: "20px" }}>
+      <h2>Edit Task</h2>
 
-         <div style={{ display: "flex", gap: "8px" }}>
-        {status !== "todo" && (
-          <button onClick={() => changeStatus("todo")}>
-            To Do
-          </button>
-        )}
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-        {status !== "inprogress" && (
-          <button onClick={() => changeStatus("progress")}>
-            In Progress
-          </button>
-        )}
+      <br /><br />
 
-        {status !== "done" && (
-          <button onClick={() => changeStatus("done")}>
-            Done
-          </button>
-        )}
-      </div>
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
-      <button
-        style={{ marginTop: "8px", color: "red" }}
-        onClick={deleteTask}
-      >
-        Delete
-      </button>
-        
+      <br /><br />
+
+      <button onClick={saveHandler}>Save</button>
+      <button onClick={() => navigate("/")}>Cancel</button>
     </div>
-  )
+  );
 }
 
-
-export default TaskDetail
+export default TaskDetail;

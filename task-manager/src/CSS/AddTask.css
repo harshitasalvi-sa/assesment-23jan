@@ -1,6 +1,13 @@
-#title, #desc{
+/* .container{
+    margin: auto;
+    margin-top: 10%;
+} */
+#title, #desc, #submit{
     padding: 10px;
 }
+#desc{
+    width: 300px;
+}
 .task-form{
-    margin: auto;
+    margin: 20px;
 }

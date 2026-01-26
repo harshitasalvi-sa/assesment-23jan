@@ -1,46 +1,60 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {createContext, useState, useEffect} from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
-import AddTask from "./pages/AddTask";
-import TaskDetail from "./pages/TaskDetail"
-import NotFound from "./pages/NotFound"
-import About from "./pages/About"
+import {useContext} from "react";
 
-// TODO: Import your context providers
-// import { TaskProvider } from './context/TaskContext';
-// import { ThemeProvider } from './context/ThemeContext';
+//TODO: Import your context providers
+import TaskProvider from './context/TaskContext';
+import ThemeProvider from './context/ThemeContext';
+import {ThemeContext} from "./context/ThemeContext";
 
 // TODO: Import your components
 import Navbar from './components/Navbar';
 
 // TODO: Import your pages
-// import Home from './pages/Home';
-// import AddTask from './pages/AddTask';
-// import TaskDetail from './pages/TaskDetail';
-// import About from './pages/About';
-// import NotFound from './pages/NotFound';
+import Home from './pages/Home';
+import AddTask from './pages/AddTask';
+import TaskDetail from './pages/TaskDetail';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
 
-const ThemeContext = createContext();
-const TaskContext = createContext();
+// const ThemeContext = createContext();
+// const TaskContext = createContext();
 
 function App() {
-  const [theme, setTheme] = useState("light");
-  // const [taskList, setTaskList] = useState([]);
-  const [taskList, setTaskList] = useState(() => {
-    const stored = localStorage.getItem("tasks");
-    return stored ? JSON.parse(stored) : [];
-  });
+  // const [theme, setTheme] = useState("light");
+  // // const [taskList, setTaskList] = useState([]);
+  // const [taskList, setTaskList] = useState(() => {
+  //   const stored = localStorage.getItem("tasks");
+  //   return stored ? JSON.parse(stored) : [];
+  // });
 
-  useEffect(()=>{
-    localStorage.setItem("tasks", JSON.stringify(taskList));
-  },[taskList])
+  // useEffect(()=>{
+  //   localStorage.setItem("tasks", JSON.stringify(taskList));
+  // },[taskList])
+
+  
+    // const { theme } = useContext(ThemeContext);
 
   return (
-    <div className={`App ${theme}`}>
+    <div className={`App`}>
+      
+          <ThemeProvider>
+          <TaskProvider>
+            <BrowserRouter>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/add" element={<AddTask />} />
+                <Route path="/tasks/:id" element={<TaskDetail />} />
+                <Route path="/about" element={<About />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TaskProvider>
+        </ThemeProvider>
       
       {/* TODO: Wrap with your context providers */}
-      <ThemeContext.Provider value={{theme, setTheme}}>
+      {/* <ThemeContext.Provider value={{theme, setTheme}}>
         <TaskContext.Provider value={{taskList, setTaskList}}>
 
       <Router>
@@ -60,11 +74,9 @@ function App() {
       </Router>
 
         </TaskContext.Provider>
-      </ThemeContext.Provider> 
+      </ThemeContext.Provider>  */}
     </div>
   );
 }
 
 export default App;
-export {ThemeContext};
-export {TaskContext};

@@ -12,3 +12,14 @@
     padding: 0.5rem;
     align-items: center;
 }
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    color:  var(--text-color);
+}
+.wrapper .link{
+    text-decoration: none;
+    color:  var(--bg-primary);
+}
