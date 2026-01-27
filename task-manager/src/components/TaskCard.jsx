@@ -24,12 +24,12 @@ function TaskCard({ task }) {
 
         <div className="btn-wrapper" onClick = {(e)=> {e.stopPropagation()}}>
             <p>Move: </p>
-            <button class="btns" onClick={() => move("todo")} id="todo-btn">To Do</button>
-            <button class="btns"  onClick={() => move("inprogress")} id="progress-btn">In Progress</button>
-            <button class="btns"  onClick={() => move("done")} id="done-btn">Done</button>
+            <button className="btns" onClick={() => move("todo")} id="todo-btn">To Do</button>
+            <button className="btns"  onClick={() => move("inprogress")} id="progress-btn">In Progress</button>
+            <button className="btns"  onClick={() => move("done")} id="done-btn">Done</button>
 
             <button
-            class="btns"  
+            className="btns"  
                 id="delete-btn"
                 onClick={() =>
                 dispatch({ type: "DELETE_TASK", payload: task.id })
