@@ -8,13 +8,12 @@ export default function SearchBar() {
     <>
       <input
         placeholder="Search..."
-        onChange={e =>
-          dispatch({ type: "SET_SEARCH", payload: e.target.value })
-        }
+        disabled
+        style={{ opacity: 0.5 }}
       />
       <select
         onChange={e =>
-          dispatch({ type: "SEARCH_TASK", payload: e.target.value })
+          dispatch({ type: "SET_FILTER", payload: e.target.value })
         }
       >
         <option value="all">All</option>

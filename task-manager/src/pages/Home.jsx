@@ -9,7 +9,7 @@ const Home = () => {
   // console.log("Home - taskList", taskList);
 
     const {state} = useContext(TaskContext);
-    const { tasks} = state;
+    const { tasks, filter} = state;
 
      if (!tasks || tasks.length === 0) {
       return <p>No tasks yet. Add one!</p>;
@@ -18,7 +18,7 @@ const Home = () => {
     const renderColumn = (status, title) => (
       <div className="column">
         <h3 id={status}>{title}</h3>
-        {tasks.filter(task => task.status === status)
+        {tasks.filter(task => task.status === status )
           .map(task => (
             <TaskCard key={task.id} task={task} />
           ))}
@@ -33,12 +33,23 @@ const Home = () => {
         <TaskBoard type="progress"/>
         <TaskBoard type="done"/>
         </div> */}
-
-        <SearchBar />
+        
         <div className="board">
-          {renderColumn("todo","To do")}
-          {renderColumn("inprogress", "In Progress")}
-          {renderColumn("done", "Done")}
+          {filter === "all" ? (
+            <>
+              {renderColumn("todo", "To do")}
+              {renderColumn("inprogress", "In Progress")}
+              {renderColumn("done", "Done")}
+            </>
+          ) : (
+            <>
+              {tasks.filter(task => task.status === filter).length > 0 ? (
+                renderColumn(filter, filter === "todo" ? "To Do" : filter === "inprogress" ? "In Progress" : "Done")
+              ) : (
+                <p>No tasks found with status: {filter}</p>
+              )}
+            </>
+          )}
         </div>
         
     </div>

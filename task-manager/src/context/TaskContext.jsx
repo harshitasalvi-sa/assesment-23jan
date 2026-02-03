@@ -5,7 +5,7 @@ export const TaskContext = createContext();
 
 const initialState = {
   tasks: [],
-  filteredTasks :[]
+  filter :"all"
 };
 
 function taskReducer(state, action) {
@@ -37,10 +37,11 @@ function taskReducer(state, action) {
             : t
         ),
       };
-    case "SEARCH_TASK":
+    case "SET_FILTER":
       return {
         ...state, 
-        filteredTasks : state.tasks.filter(t => t.status == action.payload)
+        filter : action.payload
+        // filteredTasks : state.tasks.filter(t => t.status == action.payload)
       }
 
     default:

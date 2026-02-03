@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import {useContext} from "react";
 //TODO: Import your context providers
 import TaskProvider from './context/TaskContext';
-import ThemeProvider, { ThemeContext } from './context/ThemeContext';
+import ThemeProvider from './context/ThemeContext';
 
 // TODO: Import your components
 import Navbar from './components/Navbar';

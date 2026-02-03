@@ -4,6 +4,8 @@ import {useContext, useEffect} from "react"
 import "../CSS/Navbar.css"
 import ThemeToggle from "./ThemeToggle.jsx"
 import { ThemeContext } from '../context/ThemeContext'
+import SearchBar from "./SearchBar.jsx"
+
 const Navbar = React.memo(() => {
     //  const {theme} = useContext(ThemeContext);
     // function toggleTheme(){
@@ -36,6 +38,7 @@ const Navbar = React.memo(() => {
                     {/* <button className='theme-btn' onClick={toggleTheme}> 
                         {theme==="light" ? "Dark Mode" : "Light Mode"}
                     </button> */}
+                    <SearchBar/>
 
                     <ThemeToggle/>
                 </div>
