@@ -1,7 +1,8 @@
-import React from 'react'
+
 import { useContext, useState } from "react"
 import { TaskContext } from "../context/TaskContext";
 import "../CSS/AddTask.css"
+import ConfirmDialog from "../components/ConfirmDialog";
 //import { v4 as uuid } from "uuid";
 
 const AddTask = () => {
@@ -12,13 +13,6 @@ const AddTask = () => {
 
     const submitHandler = (e) =>{
         e.preventDefault();
-
-        // const obj = {
-        //     id: Date.now(),
-        //     title : title,
-        //     desc : desc,
-        //     status : "todo"
-        // }
 
         dispatch({
             type: "ADD_TASK",

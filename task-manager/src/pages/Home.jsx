@@ -1,6 +1,6 @@
-import React from 'react'
+import SearchBar from "../components/SearchBar"
 import "../CSS/Home.css"
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 import TaskCard from "../components/TaskCard";
 
@@ -25,7 +25,7 @@ const Home = () => {
       </div>
     );
   return (
-    <div> 
+    <div className="container"> 
         {/* <h1>Home Page</h1>
         <div className="main">
            
@@ -34,7 +34,7 @@ const Home = () => {
         <TaskBoard type="done"/>
         </div> */}
 
-        {/* <SearchBar /> */}
+        <SearchBar />
         <div className="board">
           {renderColumn("todo","To do")}
           {renderColumn("inprogress", "In Progress")}

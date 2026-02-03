@@ -14,7 +14,7 @@ export default function SearchBar() {
       />
       <select
         onChange={e =>
-          dispatch({ type: "SET_FILTER", payload: e.target.value })
+          dispatch({ type: "SEARCH_TASK", payload: e.target.value })
         }
       >
         <option value="all">All</option>

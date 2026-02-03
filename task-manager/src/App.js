@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import {useContext} from "react";
 //TODO: Import your context providers
 import TaskProvider from './context/TaskContext';
-import ThemeProvider from './context/ThemeContext';
+import ThemeProvider, { ThemeContext } from './context/ThemeContext';
 
 // TODO: Import your components
 import Navbar from './components/Navbar';
@@ -29,23 +30,19 @@ function App() {
   //   localStorage.setItem("tasks", JSON.stringify(taskList));
   // },[taskList])
 
-  
-    // const { theme } = useContext(ThemeContext);
-
   return (
-    <div className={`App`}>
-      
+    <div className={`App `}>
           <ThemeProvider>
           <TaskProvider>
             <BrowserRouter>
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/add" element={<AddTask />} />
-                <Route path="/tasks/:id" element={<TaskDetail />} />
-                <Route path="/about" element={<About />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/add" element={<AddTask />} />
+                  <Route path="/tasks/:id" element={<TaskDetail />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
             </BrowserRouter>
           </TaskProvider>
         </ThemeProvider>

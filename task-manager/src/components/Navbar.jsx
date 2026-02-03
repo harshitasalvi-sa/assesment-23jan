@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import "../CSS/Navbar.css"
 import ThemeToggle from "./ThemeToggle.jsx"
 import { ThemeContext } from '../context/ThemeContext'
@@ -21,6 +21,11 @@ const Navbar = React.memo(() => {
     const toggleTheme = () => {
         dispatch({ type: "TOGGLE_THEME" });
     };
+
+    useEffect(() => {
+        document.body.setAttribute('data-theme', theme);
+        //document.body.className = theme; 
+    }, [theme]);
   return (
     <div>
         <nav className='navbar'>
